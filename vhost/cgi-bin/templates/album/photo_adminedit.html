@@ -1,0 +1,56 @@
+<h2>Photos Admin - [% IF data.photoid %]Edit[% ELSE %]Add[% END %] A Photo</h2>
+
+<form method="post" action="[% cgipath %]/pages.cgi">
+<input type="hidden" name="act" value="album-photosave" />
+<input type="hidden" name="photoid" value="[% data.photoid %]" />
+
+<div class="admin">
+<table>
+[% IF data.pageid %]
+<tr><td>Photo No.</td>
+    <td></td>
+    <td>[% record.photoid %]</td></tr>
+<tr><td>Page</td>
+    <td class="red">[% data.pageid_err %]</td>
+    <td><select name="pageid">
+
+[% FOREACH pg = pages %]
+<option value="[% pg.pageid %]" [% IF pg.pageid == data.pageid %]selected="selected"[% END %]>[% pg.title %]</option>
+[% END %]
+
+        </select></td></tr>
+[% ELSE %]
+<tr><td>Area</td>
+    <td class="red">[% data.title_err %]</td>
+    <td><select name="area">
+
+[% FOREACH senario = data.senarios %]
+<option value="[% senario.id %]" [% IF senario.id == 2 %]selected="selected"[% END %]>[% senario.title %]</option>
+[% END %]
+
+        </select></td></tr>
+[% END %]
+
+<tr><td>Hidden</td>
+    <td class="red">[% data.hide_err %]</td>
+    <td><input type=checkbox name="hide" size="30" [% IF data.hide %]checked="checked"[% END %] /></td></tr>
+<tr><td>Thumbnail</td>
+    <td class="red">[% data.thumb_err %]</td>
+    <td><input type="text" name="thumb" size="30" value="[% data.thumb %]" /></td></tr>
+<tr><td></td>
+    <td></td>
+    <td><img src="[% webpath %]/photos/[% data.thumb %]" height="50" /></td></tr>
+<tr><td>Photo</td>
+    <td class="red">[% data.image_err %]</td>
+    <td><input type="text" name="image" size="30" value="[% data.image %]" /></td></tr>
+<tr><td></td>
+    <td></td>
+    <td><img src="[% webpath %]/photos/[% data.image %]" /></td></tr>
+<tr><td>Tagline</td>
+    <td class="red">[% data.tagline_err %]</td>
+    <td><input type="text" name="tagline" size="30" value="[% data.tagline %]" /></td></tr>
+</table>
+</div>
+
+<p class="smalltext"><input type=image src="[% webpath %]/images/icons/save.gif" alt="save page" /> - Save Page
+</form>
