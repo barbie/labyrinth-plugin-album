@@ -1,32 +1,23 @@
-Labyrinth::Plugin::ReqUsersContributed Perl DocuLabyrinth::Plugin::Links(3)
+Labyrinth::Plugin::Album(3)                        Labyrinth::Plugin::Album(3)
 
 
 
 NAME
-       Labyrinth::Plugin::Links - Links administration for the Labyrinth
-       framework.
+       Labyrinth::Plugin::Album - Photo album plugin handler for Labyrinth
 
 DESCRIPTION
-       Contains all the request administration functionality for Labyrinth.
-
-ADMIN INTERFACE METHODS
-       Admin
-       Add
-       Edit
-       Save
-       Delete
-       SecureSelect
-       SecureName
+       Contains all the photo album handling functionality for the Labyrinth
+       framework.
 
 SEE ALSO
-       Labyrinth
+         Labyrinth
 
 AUTHOR
        Barbie, <barbie@missbarbell.co.uk> for Miss Barbell Productions,
        <http://www.missbarbell.co.uk/>
 
 COPYRIGHT & LICENSE
-         Copyright (C) 2002-2011 Barbie for Miss Barbell Productions
+         Copyright (C) 2002-2012 Barbie for Miss Barbell Productions
          All Rights Reserved.
 
          This module is free software; you can redistribute it and/or
@@ -34,4 +25,4 @@ COPYRIGHT & LICENSE
 
 
 
-perl v5.10.1                      2011-01-19    Labyrinth::Plugin::Links(3)
+perl v5.10.1                      2012-01-08       Labyrinth::Plugin::Album(3)

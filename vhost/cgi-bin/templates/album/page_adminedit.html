@@ -54,6 +54,20 @@ the page.
 <tr><th>Month</th>
     <td class="red">[% data.month_err %]</td>
     <td>[% data.ddmonths %]</td></tr>
+[% IF data.path %]
+<tr><th>Path</th>
+    <td></td>
+    <td>/[% data.path %] (path is
+        [% IF    ! data.exists     %]<span class="alert">missing</span>
+        [% ELSIF ! data.directory  %]<span class="alert">not a directory</span>
+        [% ELSIF ! data.readable   %]<span class="alert">is not readable</span>
+        [% ELSIF ! data.writeable  %]<span class="alert">is not writeable</span>
+        [% ELSIF ! data.executable %]<span class="alert">is not executable</span>
+        [% ELSE %]accessible
+        [% END %]
+        )    
+    </td></tr>
+[% END %]
 </table>
 
 <p class="smalltext"><input type="submit" value='Save Page' />

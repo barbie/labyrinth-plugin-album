@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Pages;
 use strict;
 use warnings;
 
-my $VERSION = '1.00';
+my $VERSION = '1.01';
 
 =head1 NAME
 
@@ -423,6 +423,14 @@ sub Edit {
     $tvars{data}->{ddmonths} = MonthSelect($tvars{data}->{month});
     $tvars{data}->{ddyears}  = YearSelect($tvars{data}->{year},2);
     $tvars{data}->{ddpages}  = PageSelect(undef,1,'parent',$tvars{data}->{pageid});
+
+    # check we have an accessible directory to store photos
+    my $dir = "$settings{webdir}/$tvars{data}->{path}";
+    $tvars{data}->{exists}     = -e "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+    $tvars{data}->{directory}  = -d "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+    $tvars{data}->{readable}   = -r "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+    $tvars{data}->{writeable}  = -w "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+    $tvars{data}->{executable} = -x "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
 }
 
 sub Save {
