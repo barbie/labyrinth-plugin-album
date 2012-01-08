@@ -1,6 +1,6 @@
 Changes for the Labyrinth-Plugin-Album
 
-1.01	current
+1.01	08/01/2012
 	- check we have an accessible directory to store photos
 	- added missing modules in metadata provides.
 
