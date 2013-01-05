@@ -431,6 +431,12 @@ sub Edit {
     $tvars{data}->{readable}   = -r "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
     $tvars{data}->{writeable}  = -w "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
     $tvars{data}->{executable} = -x "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+
+    # default image sizes
+    $tvars{dimensions}->{photowidth}  = $settings{maxphotowidth}  || MaxPhotoWidth;
+    $tvars{dimensions}->{photoheight} = $settings{maxphotoheight} || MaxPhotoHeight;
+    $tvars{dimensions}->{thumbwidth}  = $settings{maxthumbwidth}  || MaxThumbWidth;
+    $tvars{dimensions}->{thumbheight} = $settings{maxthumbheight} || MaxThumbHeight;
 }
 
 sub Save {
@@ -456,10 +462,11 @@ sub Save {
         mkpath($path);
     }
 
-    $tvars{data}->{hide} ||= 0; # visible by default
-    $tvars{data}->{area} ||= 2; # photo album
+    $tvars{data}->{parent} ||= 0; # no parent by default
+    $tvars{data}->{hide}   ||= 0; # visible by default
+    $tvars{data}->{area}   ||= 2; # photo album
     my @columns = $tvars{data}->{pageid} ? @savefields : @addfields;
-    my @fields = map {($tvars{data}->{$_}||undef)} @columns;
+    my @fields = map {(defined $tvars{data}->{$_} ? $tvars{data}->{$_} : undef)} @columns;
 #LogDebug("columns=[@columns], fields=[@fields]");
     if($tvars{data}->{pageid})
             {                         $dbi->DoQuery('UpdatePage',@fields)  }
