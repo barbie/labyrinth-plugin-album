@@ -16,6 +16,7 @@ t/96metatest.t
 vhost/cgi-bin/config/parserules.ini
 vhost/cgi-bin/config/phrasebook.ini
 vhost/cgi-bin/config/requests/album.ini
+vhost/cgi-bin/config/requests/hits.ini
 vhost/cgi-bin/db/plugin-base.sql
 vhost/cgi-bin/templates/album/page_adminedit.html
 vhost/cgi-bin/templates/album/page_adminlist.html
@@ -26,3 +27,6 @@ vhost/cgi-bin/templates/album/photo_gallery.html
 vhost/cgi-bin/templates/album/photo_image.html
 vhost/cgi-bin/templates/album/photo_list.html
 vhost/cgi-bin/templates/album/photo_thumbs.html
+vhost/cgi-bin/templates/hits/hits_pages.html
+vhost/cgi-bin/templates/hits/hits_photos.html
+vhost/html/js/multifile.js
