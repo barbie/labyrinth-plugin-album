@@ -1,6 +1,6 @@
 {
     "name": "Labyrinth::Plugin::Album",
-    "version": "1.01",
+    "version": "1.03",
     "abstract": "Album plugin for the Labyrinth framework",
     "author": [
         "Barbie (BARBIE) <barbie@cpan.org>"
@@ -46,15 +46,15 @@
     "provides": {
         "Labyrinth::Plugin::Album": {
             "file": "lib/Labyrinth/Plugin/Album.pm",
-            "version": "1.01"
+            "version": "1.03"
         },
         "Labyrinth::Plugin::Album::Pages": {
             "file": "lib/Labyrinth/Plugin/Album/Pages.pm",
-            "version": "1.01"
+            "version": "1.03"
         },
         "Labyrinth::Plugin::Album::Photos": {
             "file": "lib/Labyrinth/Plugin/Album/Photos.pm",
-            "version": "1.01"
+            "version": "1.03"
         }
     },
     "no_index": {
@@ -62,7 +62,8 @@
     },
 
     "resources": {
-        "license": "http://dev.perl.org/licenses/",
+        "license": "http://www.perlfoundation.org/artistic_license_2_0",
+        "homepage": "http://labyrinth.missbarbell.co.uk",
         "bugtracker": { "web": "http://rt.cpan.org/Public/Dist/Display.html?Name=Labyrinth-Plugin-Album" },
         "repository": {
             "url": "git://github.com/barbie/labyrinth-plugin-album.git",

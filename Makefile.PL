@@ -17,7 +17,7 @@ WriteMakefile(
         # prereqs
         'Image::Size'               => '0',
         'Labyrinth'                 => '5.10',
-        'Labyrinth::Plugin::Hits'   => '5.09'
+        'Labyrinth::Plugin::Hits'   => '5.09',
 
         # build/test prereqs
         'Test::More'                => '0.70',
