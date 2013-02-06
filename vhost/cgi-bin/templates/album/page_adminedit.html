@@ -1,23 +1,14 @@
-<script language="javascript" type="text/javascript" src="[% webpath %]/js/tiny_mce/tiny_mce.js"></script>
-<script language="javascript" type="text/javascript">
-tinyMCE.init({
-    mode : "textareas",
-    theme : "advanced",
-    plugins : "preview,searchreplace",
-    theme_advanced_buttons1 : "bold,italic,underline,strikethrough,sub,sup,formatselect,hr,|,justifyleft,justifycenter,justifyright,justifyfull",
-    theme_advanced_buttons2 : "bullist,numlist,|,link,unlink,anchor,|,undo,redo,search,replace,|,cleanup,help,preview",
-    theme_advanced_buttons3 : "",
-    theme_advanced_toolbar_location : "top",
-    theme_advanced_toolbar_align : "left",
-    theme_advanced_path_location : "bottom",
-    extended_valid_elements : "hr[class|width|size|noshade]",
-    force_br_newlines : true,
-    force_p_newlines : false,
-    convert_urls : false
-});
-</script>
+[% 
+    IF data.pageid ; THEN ; status = 'Edit' ; ELSE ; status = 'Add' ; END ;
 
+    title = status _ ' Gallery Page' ;
 
+    crumb2_name = 'Gallery' ;
+    crumb2_href = '/album-admin' ;
+    crumb1_name = status ;
+%]
+
+[% INCLUDE "admin/tinymce-short.html" %]
 
 <form action="[% cgipath %]/pages.cgi" method="post" enctype="multipart/form-data">
 <input type="hidden" name="act" value="album-pagesave" />
@@ -31,23 +22,25 @@ tinyMCE.init({
 to the time taken on the server to copy your files, create thumbnails and store
 their information in the database. Photos uploaded can be any size, but will be
 resized if necessary to fit within a 1024x1024 pixel square. Thumbnails are
-created to fit within a 100x100 pixel square.
+created to fit within a 100x100 pixel square.</p>
 [% ELSE %]
 <p>Please enter details for the page you wish to create. Once you have
 successfully saved the main details, you will then be able to upload photos for
-the page.
+the page.</p>
 [% END %]
 </div>
 
 <div class="boxer">
-<table>
-
-<tr><th>Title</th>
-    <td class="red">[% data.title_err %]</td>
+<table class="blocker">
+<tr><th>Title *</th>
+   <td class="red">[% data.title_err %]</td>
     <td><input type="text" name="title" value="[% data.title %]" size="32" maxlength="64" /></td></tr>
 <tr><th>Summary</th>
     <td class="red">[% data.summary_err %]</td>
     <td><textarea name="summary" rows="10" cols="50">[% data.summary %]</textarea></td></tr>
+<tr><th>Hide</th>
+    <td class="red">[% data.hide_err %]</td>
+    <td><input type="checkbox" name="hide" [% IF data.hide %]checked="checked"[% END %] /></td></tr>
 <tr><th>Year</th>
     <td class="red">[% data.year_err %]</td>
     <td>[% data.ddyears %]</td></tr>
@@ -70,15 +63,16 @@ the page.
 [% END %]
 </table>
 
-<p class="smalltext"><input type="submit" value='Save Page' />
+<p class="smalltext"><input type="submit" value='Save Page' /></p>
 </div>
 
 [% IF data.pageid %]
 <div class="boxer">
-<table>
+<table class="blocker">
 <tr><th>Order</th>
     <th>Thumbnail</th>
     <th>Tagline</th>
+    <th>Cover</th>
     <th>Hide</th>
     <th>Delete</th>
     <th>Actions</th>
@@ -89,6 +83,7 @@ the page.
     <td>[% photo.orderno %]</td>
     <td><a href='[% picpath %]/photos/[% photo.image %]'><img src="[% webpath %]/photos/[% photo.thumb %]" height="50" border="0" alt="[% photo.tag %]" /></a></td>
     <td>[% photo.image %]<br /><input type="text" name="TAG[% photo.photoid %]" value="[% photo.tagline %]" /> - Tagline<br /><input type="text" name="META[% photo.photoid %]" value="[% photo.metadata %]" /> - Metadata</td>
+    <td><input type="radio"    name="COVER"  value="[% photo.photoid %]" [% IF photo.cover %]checked="checked"[% END %] /></td>
     <td><input type="checkbox" name="HIDE" value="[% photo.photoid %]" [% IF photo.hide %]checked="checked"[% END %] /></td>
     <td><input type="checkbox" name="DELETE" value="[% photo.photoid %]" /></td>
     <td><a href="[% cgipath %]/pages.cgi?act=album-pageedit&amp;pageid=[% photo.pageid %]&amp;photoid=[% photo.photoid %]&amp;order=up"><img src="[% webpath %]/images/icons/icon_up.gif" alt="up" height="15" /></a>
@@ -97,7 +92,7 @@ the page.
 [% END %]
 </table>
 
-<p class="smalltext"><input type="submit" value='Save Page' />
+<p class="smalltext"><input type="submit" value='Save Page' /></p>
 </div>
 
 <div class="boxer">
@@ -117,7 +112,7 @@ the page.
         multi_selector.addElement( document.getElementById( 'FileUpload' ) );
     </script>
 
-<p class="smalltext"><input type="submit" value='Save Page' />
+<p class="smalltext"><input type="submit" value='Save Page' /></p>
 </div>
 [% END %]
 

@@ -1,10 +1,18 @@
-<h2>Photos Admin<h2>
+[% 
+    title = 'Photos Admin' ;
 
-<p>[% thanks_message %]
-<p><a href="[% cgipath %]/pages.cgi?act=album-photoadd"><img src="[% webpath %]/images/icons/add.gif" alt="add a photo" /></a> - Add a Photo
+    crumb2_name = 'Gallery' ;
+    crumb2_href = '/album-admin' ;
+    crumb1_name = title ;
+%]
 
-<div class="admin">
-<table>
+<div class="boxer">
+<p>[% thanks_message %]</p>
+<p><a href="[% cgipath %]/pages.cgi?act=album-photoadd"><img src="[% webpath %]/images/icons/add.gif" alt="add a photo" /></a> - Add a Photo</p>
+</div>
+
+<div class="boxer">
+<table class="blocker">
 <tr>
 <td class="bold">Image No.</td>
 <td class="bold">Thumbnail</td>
@@ -25,4 +33,6 @@
 </table>
 </div>
 
-<p><a href="[% cgipath %]/pages.cgi?act=album-photoadd"><img src="[% webpath %]/images/icons/add.gif" alt="add a photo" /></a> - Add a Photo
+<div class="boxer">
+<p><a href="[% cgipath %]/pages.cgi?act=album-photoadd"><img src="[% webpath %]/images/icons/add.gif" alt="add a photo" /></a> - Add a Photo</p>
+</div>
