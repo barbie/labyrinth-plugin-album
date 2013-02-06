@@ -10,6 +10,7 @@ distribution_type:          module
 installdirs:                site
 
 requires:
+  perl:                     5.006
   Image::Size:              0
   Labyrinth:                5.10
   Labyrinth::Plugin::Hits:  5.09
