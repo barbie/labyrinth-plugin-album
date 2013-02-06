@@ -51,12 +51,12 @@ use constant    MaxThumbHeight  => 200;
 my %fields = (
     title       => { type => 1, html => 1 },
     summary     => { type => 0, html => 2 },
-    area        => { type => 0, html => 0 },
-    year        => { type => 0, html => 0 },
-    month       => { type => 0, html => 0 },
-    pageid      => { type => 0, html => 0 },
-    parent      => { type => 0, html => 0 },
-    hide        => { type => 0, html => 0 },
+    area        => { type => 0, html => 1 },
+    year        => { type => 0, html => 1 },
+    month       => { type => 0, html => 1 },
+    pageid      => { type => 0, html => 1 },
+    parent      => { type => 0, html => 1 },
+    hide        => { type => 0, html => 1 },
 );
 
 my (@mandatory,@allfields);
@@ -69,7 +69,7 @@ my @savefields  = qw(parent title summary year month hide pageid);
 my @addfields   = qw(parent title summary year month hide area path);
 
 my $INDEXKEY    = 'pageid';
-my $LEVEL       = ADMIN;
+my $LEVEL       = PUBLISHER;
 
 my $hits   = Labyrinth::Plugin::Hits->new();
 
@@ -130,6 +130,18 @@ sub List {
         for(keys %fields) {
                if($fields{$_}->{html} == 1) { $rec->{$_} = CleanHTML($rec->{$_}); }
             elsif($fields{$_}->{html} == 2) { $rec->{$_} = CleanTags($rec->{$_}); }
+        }
+
+        my $dw = $settings{gallerythumbwidth}  || MaxThumbWidth;
+        my $dh = $settings{gallerythumbheight} || MaxThumbHeight;
+
+        if($rec->{dimensions}) {
+            my ($w,$h) = split('x',$rec->{dimensions});
+            if($w/$dw > $h/$dh) {
+                $rec->{width} = $dw;
+            } else {
+                $rec->{height} = $dh;
+            }
         }
     }
 
@@ -463,8 +475,8 @@ sub Save {
     }
 
     $tvars{data}->{parent} ||= 0; # no parent by default
-    $tvars{data}->{hide}   ||= 0; # visible by default
     $tvars{data}->{area}   ||= 2; # photo album
+    $tvars{data}->{hide}   = $tvars{data}->{hide} ? 1 : 0; # visible by default
     my @columns = $tvars{data}->{pageid} ? @savefields : @addfields;
     my @fields = map {(defined $tvars{data}->{$_} ? $tvars{data}->{$_} : undef)} @columns;
 #LogDebug("columns=[@columns], fields=[@fields]");
@@ -478,9 +490,22 @@ sub Save {
     return  unless($tvars{data}->{pageid});
 
     # archive unwanted photos
-    my @ids = CGIArray('DELETE');
+    my @ids = grep { /^\d+$/ } CGIArray('DELETE');
 #   LogDebug("Delete IDs: @ids");
-    $dbi->DoQuery('MovePhoto',1,$_)    for(@ids);
+    if($cgiparams{pageid} == 1) {
+        # only delete photos in the archive
+        my @rows = $dbi->GetQuery('hash','CheckPhotos',{ids => join(',',@ids)},1);
+        for(@rows) {
+            my @photo = $dbi->GetQuery('hash','CheckPhoto',1,$_->{photoid});
+            if(@photo && $photo[0]->{count} == 1) {   # only delete if no others match
+                DeleteFile( file => "$settings{webdir}/photos/$_->{image}" );
+                DeleteFile( file => "$settings{webdir}/photos/$_->{thumb}" );
+            }
+            $dbi->DoQuery('DeletePhoto',$_->{photoid});
+        }
+    } else {
+        $dbi->DoQuery('MovePhotos',{ids => join(',',@ids)},1);
+    }
 
     # get fresh list
     my @rs = $dbi->GetQuery('hash','GetPhotosInOrder',$tvars{data}->{pageid});
@@ -495,8 +520,9 @@ sub Save {
         my $id = $rec->{photoid};
         my $tag = defined $cgiparams{"TAG$id"} ? $cgiparams{"TAG$id"} : '';
         my $hide = $hidden{$id} ? 1 : 0;
+        my $cover = defined $cgiparams{"COVER"} && $cgiparams{"COVER"} == $id ? 1 : 0;
 
-        $dbi->DoQuery('UpdatePhoto',$order,$hide,$tag,$id);
+        $dbi->DoQuery('UpdatePhoto',$order,$hide,$tag,$cover,$id);
         $order++;
 
         my $data = defined $cgiparams{"META$id"} ? $cgiparams{"META$id"} : '';
@@ -524,7 +550,7 @@ sub Save {
 }
 
 sub Delete {
-    return  unless AccessUser($LEVEL);
+    return  unless AccessUser(ADMIN);
     return  unless $cgiparams{$INDEXKEY};
     return  unless $cgiparams{$INDEXKEY} > 2;   # Cannot delete the Archive or Homepage folders
 
@@ -577,4 +603,3 @@ Miss Barbell Productions, L<http://www.missbarbell.co.uk/>
   modify it under the Artistic License 2.0.
 
 =cut
-

@@ -340,6 +340,18 @@ sub Edit {
 
 }
 
+sub Move {
+    return  unless AccessUser($LEVEL);
+    my $photoid = $cgiparams{'iid'};
+    my $pageid  = $cgiparams{'pid'};
+    my $oldid   = $cgiparams{'oid'};
+
+    return  unless($photoid && $pageid && $oldid);
+
+    # get page details
+    $dbi->DoQuery('MovePhoto',$pageid,$oldid,$photoid);
+}
+
 sub Save {
     return  unless AccessUser($LEVEL);
 

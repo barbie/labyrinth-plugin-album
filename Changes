@@ -1,5 +1,13 @@
 Changes for the Labyrinth-Plugin-Album
 
+        - added cover photo feature.
+        - added config support for image and thmbnail sizes.
+        - update field validation.
+        - default lowered to PUBLISHER.
+        - fixed hide gallery album.
+        - allow deletion of archive photos from filesystem.
+        - allow photos to be moved between albums.
+
 1.03	2013-01-06
         - aded hits dispatch and template files.
         - change file dates changed to meet W3CDTF standards.
