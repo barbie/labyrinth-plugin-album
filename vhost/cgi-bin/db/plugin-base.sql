@@ -3,78 +3,65 @@
 --
 
 DROP TABLE IF EXISTS `imetadata`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `imetadata` (
-  `imageid` int(10) unsigned NOT NULL default '0',
-  `tag` varchar(255) NOT NULL default '',
+  `imageid` int(10) unsigned NOT NULL DEFAULT '0',
+  `tag` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`imageid`,`tag`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `ixpages`
 --
 
 DROP TABLE IF EXISTS `ixpages`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `ixpages` (
-  `eventid` int(10) unsigned NOT NULL default '0',
-  `pageid` int(10) unsigned NOT NULL default '0',
+  `eventid` int(10) unsigned NOT NULL DEFAULT '0',
+  `pageid` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY  (`eventid`,`pageid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `mxpages`
 --
 
 DROP TABLE IF EXISTS `mxpages`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `mxpages` (
-  `pageid` int(10) unsigned NOT NULL auto_increment,
-  `metadata` varchar(255) NOT NULL default '',
+  `pageid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `metadata` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`pageid`,`metadata`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `mxphotos`
 --
 
 DROP TABLE IF EXISTS `mxphotos`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `mxphotos` (
-  `photoid` int(10) unsigned NOT NULL auto_increment,
-  `metadata` varchar(255) NOT NULL default '',
+  `photoid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `metadata` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`photoid`,`metadata`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `pages`
 --
 
 DROP TABLE IF EXISTS `pages`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `pages` (
-  `pageid` int(11) NOT NULL auto_increment,
-  `parent` int(11) default '0',
-  `area` int(11) NOT NULL default '0',
-  `title` varchar(64) default NULL,
-  `year` int(4) NOT NULL default '0',
-  `month` int(4) NOT NULL default '0',
-  `orderno` int(4) default '0',
-  `hide` int(1) default '0',
-  `path` varchar(64) NOT NULL default '',
+  `pageid` int(11) NOT NULL AUTO_INCREMENT,
+  `parent` int(11) DEFAULT '0',
+  `area` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(64) DEFAULT NULL,
+  `year` int(4) NOT NULL DEFAULT '0',
+  `month` int(4) NOT NULL DEFAULT '0',
+  `orderno` int(4) DEFAULT '0',
+  `hide` int(1) DEFAULT '0',
+  `path` varchar(64) NOT NULL DEFAULT '',
   `summary` blob,
   PRIMARY KEY  (`pageid`)
+  KEY `YRIX` (`year`)
+  KEY `MNIX` (`month`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
 
 INSERT INTO pages (pageid,title) VALUES (1,'Archive');
 
@@ -83,34 +70,33 @@ INSERT INTO pages (pageid,title) VALUES (1,'Archive');
 --
 
 DROP TABLE IF EXISTS `photos`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `photos` (
-  `photoid` int(11) NOT NULL auto_increment,
-  `pageid` int(11) NOT NULL default '0',
-  `orderno` int(11) NOT NULL default '0',
-  `thumb` varchar(255) default NULL,
-  `image` varchar(255) default NULL,
-  `tagline` varchar(255) default NULL,
-  `hide` tinyint(4) NOT NULL default '0',
-  `dimensions` varchar(32) default NULL,
+  `photoid` int(11) NOT NULL AUTO_INCREMENT,
+  `pageid` int(11) NOT NULL DEFAULT '0',
+  `orderno` int(11) NOT NULL DEFAULT '0',
+  `thumb` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `tagline` varchar(255) DEFAULT NULL,
+  `hide` tinyint(4) NOT NULL DEFAULT '0',
+  `cover` tinyint(4) NOT NULL DEFAULT '0',
+  `dimensions` varchar(32) DEFAULT NULL,
   PRIMARY KEY  (`photoid`)
+  KEY `PAGIX` (`pageid`)
+  KEY `COVER` (`cover`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `updates`
 --
 
 DROP TABLE IF EXISTS `updates`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
 CREATE TABLE `updates` (
-  `upid` int(11) NOT NULL auto_increment,
-  `area` varchar(8) default '',
-  `pageid` int(11) default NULL,
-  `now` int(11) default NULL,
-  `pagets` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`upid`)
+  `upid` int(11) NOT NULL AUTO_INCREMENT,
+  `area` varchar(8) DEFAULT '',
+  `pageid` int(11) DEFAULT NULL,
+  `now` int(11) DEFAULT NULL,
+  `pagets` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`upid`),
+  KEY `AREIX` (`area`),
+  KEY `PAGIX` (`pageid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
