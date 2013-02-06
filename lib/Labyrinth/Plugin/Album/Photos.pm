@@ -26,6 +26,7 @@ use Image::Size;
 use Labyrinth::Audit;
 use Labyrinth::DBUtils;
 use Labyrinth::DTUtils;
+use Labyrinth::Media;
 use Labyrinth::MLUtils;
 use Labyrinth::Support;
 use Labyrinth::Variables;
@@ -55,7 +56,7 @@ for(keys %fields) {
     push @allfields, $_;
 }
 
-my $LEVEL       = ADMIN;
+my $LEVEL       = EDITOR;
 my $INDEXKEY    = 'photoid';
 
 my $hits = Labyrinth::Plugin::Hits->new();
@@ -377,9 +378,13 @@ sub Archive {
 
     my @rows = $dbi->GetQuery('hash','GetPhotoByID',$cgiparams{$INDEXKEY});
     if($rows[0]->{pageid} == 1) {
+        return  unless AccessUser(ADMIN);
+        my @photo = $dbi->GetQuery('hash','CheckPhoto',1,$cgiparams{$INDEXKEY});
+        if(@photo && $photo[0]->{count} == 1) {   # only delete if no others match
+            DeleteFile( file => "$settings{webdir}/photos/$rows[0]->{image}" );
+            DeleteFile( file => "$settings{webdir}/photos/$rows[0]->{thumb}" );
+        }
         $dbi->DoQuery('DeletePhoto',$cgiparams{$INDEXKEY});
-        unlink "$settings{webdir}/photos/".$rows[0]->{image};
-        unlink "$settings{webdir}/photos/".$rows[0]->{thumb};
         $tvars{thanks_message} = 'Photo deleted successfully.';
     } else {
         $dbi->DoQuery('MovePhoto',1,$cgiparams{$INDEXKEY});
@@ -409,4 +414,3 @@ Miss Barbell Productions, L<http://www.missbarbell.co.uk/>
   modify it under the Artistic License 2.0.
 
 =cut
-
