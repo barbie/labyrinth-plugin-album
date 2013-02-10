@@ -295,6 +295,10 @@ Prep for adding a photo.
 
 Edit details of an existing photo.
 
+=item Move
+
+Move a photo between albums.
+
 =item Save
 
 Saves details of a given photo.
