@@ -7,6 +7,7 @@ Changes for the Labyrinth-Plugin-Album
         - fixed hide gallery album.
         - allow deletion of archive photos from filesystem.
         - allow photos to be moved between albums.
+        - now requires Labyrinth Core 5.14.
 
 1.03	2013-01-06
         - aded hits dispatch and template files.
