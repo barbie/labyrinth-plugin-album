@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Photos;
 use strict;
 use warnings;
 
-my $VERSION = '1.03';
+my $VERSION = '1.04';
 
 =head1 NAME
 
@@ -66,7 +66,7 @@ my $hits = Labyrinth::Plugin::Hits->new();
 
 =head1 PUBLIC INTERFACE METHODS
 
-=head2 Default Methods
+=head2 Public Methods
 
 =over 4
 
@@ -279,7 +279,7 @@ sub Gallery {
 
 =head1 ADMIN INTERFACE METHODS
 
-=head2 Link Methods
+=head2 Administration Methods
 
 =over 4
 

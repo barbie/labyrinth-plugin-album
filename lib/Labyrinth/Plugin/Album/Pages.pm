@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Pages;
 use strict;
 use warnings;
 
-my $VERSION = '1.03';
+my $VERSION = '1.04';
 
 =head1 NAME
 
@@ -78,7 +78,7 @@ my $hits   = Labyrinth::Plugin::Hits->new();
 
 =head1 PUBLIC INTERFACE METHODS
 
-=head2 Default Methods
+=head2 Public Methods
 
 =over 4
 
@@ -197,7 +197,7 @@ sub Search {
 
 =head1 ADMIN INTERFACE METHODS
 
-=head2 Link Methods
+=head2 Administration Methods
 
 =over 4
 
@@ -348,7 +348,7 @@ sub Add {
     return  unless AccessUser($LEVEL);
 
     $tvars{data}->{senarios} = [
-        { id=>2,title=>'Photos Section'},
+        { id=>2, title=>'Photos Section' },
     ];
 
     $tvars{data}->{ddmonths} = MonthSelect($tvars{data}->{month});

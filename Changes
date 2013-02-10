@@ -1,5 +1,6 @@
 Changes for the Labyrinth-Plugin-Album
 
+1.04	2013-02-10
         - added cover photo feature.
         - added config support for image and thmbnail sizes.
         - update field validation.

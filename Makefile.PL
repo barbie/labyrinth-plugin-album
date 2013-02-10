@@ -15,6 +15,7 @@ WriteMakefile(
     PREREQ_PM           => {
 
         # prereqs
+        'File::Path'                => '0',
         'Image::Size'               => '0',
         'Labyrinth'                 => '5.14',
         'Labyrinth::Plugin::Hits'   => '5.09',
