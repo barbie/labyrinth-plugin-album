@@ -8,6 +8,8 @@ Changes for the Labyrinth-Plugin-Album
         - allow deletion of archive photos from filesystem.
         - allow photos to be moved between albums.
         - now requires Labyrinth Core 5.14.
+        - added LICENSE file.
+        - added INSTALL file.
 
 1.03	2013-01-06
         - aded hits dispatch and template files.

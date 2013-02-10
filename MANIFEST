@@ -1,7 +1,9 @@
 Changes
+INSTALL
 lib/Labyrinth/Plugin/Album.pm
 lib/Labyrinth/Plugin/Album/Pages.pm
 lib/Labyrinth/Plugin/Album/Photos.pm
+LICENSE
 Makefile.PL
 MANIFEST
 META.json
