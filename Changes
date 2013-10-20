@@ -4,6 +4,7 @@ Changes for the Labyrinth-Plugin-Album
         - added button classes.
         - updated titles and breadcrumbs.
         - added slideshow template and javascript.
+        - add functionality to list multiple albums/photos.
 
 1.04	2013-02-10
         - added cover photo feature.
