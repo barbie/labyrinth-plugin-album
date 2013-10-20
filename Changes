@@ -1,5 +1,7 @@
-Changes for the Labyrinth-Plugin-Album
+Changes for Labyrinth-Plugin-Album
+==================================
 
+1.05	2013-10-20
         - fixed XHTML tags.
         - added button classes.
         - updated titles and breadcrumbs.
