@@ -32,4 +32,5 @@ vhost/cgi-bin/templates/album/photo_list.html
 vhost/cgi-bin/templates/album/photo_thumbs.html
 vhost/cgi-bin/templates/hits/hits_pages.html
 vhost/cgi-bin/templates/hits/hits_photos.html
+vhost/html/js/fadeslideshow.js.diff
 vhost/html/js/multifile.js
