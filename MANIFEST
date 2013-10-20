@@ -25,10 +25,12 @@ vhost/cgi-bin/templates/album/page_adminlist.html
 vhost/cgi-bin/templates/album/page_list.html
 vhost/cgi-bin/templates/album/photo_adminedit.html
 vhost/cgi-bin/templates/album/photo_adminlist.html
+vhost/cgi-bin/templates/album/photo_cycle.html
 vhost/cgi-bin/templates/album/photo_gallery.html
 vhost/cgi-bin/templates/album/photo_image.html
 vhost/cgi-bin/templates/album/photo_list.html
 vhost/cgi-bin/templates/album/photo_thumbs.html
 vhost/cgi-bin/templates/hits/hits_pages.html
 vhost/cgi-bin/templates/hits/hits_photos.html
+vhost/html/js/fadeslideshow.js
 vhost/html/js/multifile.js
