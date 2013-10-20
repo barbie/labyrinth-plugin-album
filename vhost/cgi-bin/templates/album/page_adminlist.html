@@ -7,7 +7,7 @@
 <div class="boxer">
 <h2>Gallery Admin</h2>
 
-[% IF thanks_message %]<p>[% thanks_message %][% END %]
+[% IF thanks_message %]<p>[% thanks_message %]</p>[% END %]
 <p>Click on a page title to edit the contents, upload new photos or amend 
 existing photos. Note that moving gallery pages up or down, will only move 
 them in relation to others within the same month and year. Pages should be 
@@ -18,8 +18,7 @@ edited if you wish to change either month or year.</p>
 <input type="hidden" name="act" value="album-pages" />
 <input type="hidden" name="latest" value="0" />
 <input type="hidden" name="was" value="[% month %]/[% year %]" />
-<p>
-[% ddmonths %][% ddyears %] <input type="submit" value="GO" />
+<p>[% ddmonths %][% ddyears %] <input type="submit" class="gobutton" value="GO" /></p>
 </div>
 
 <div class="boxer">

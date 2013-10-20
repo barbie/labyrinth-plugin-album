@@ -1,8 +1,10 @@
 [% 
-    htmltitle = 'Thetaricals Gallery - Top Photos' ;
-    title = 'Thetaricals Gallery - Top Photos' ;
+    htmltitle = 'Top Photos' ;
+    title = htmltitle ;
 
-    crumb1_name = 'Gallery' ;
+    crumb2_name = 'Gallery' ;
+    crumb2_href = '/album-main' ;
+    crumb1_name = 'Top Photos' ;
 %]
 
 <div class="post">
@@ -15,7 +17,7 @@ from you folks.</p>
     <input type="hidden" name="latest" value="0" />
     <p>
     Search: <input type="text" name="metadata" value="" size="15" />
-    [% ddmonths %][% ddyears %] <input type="submit" value="GO" />
+    [% ddmonths %][% ddyears %] <input type="submit" class="gobutton" value="GO" />
     <p>
     <a href="[% cgipath %]/pages.cgi?act=album-main&amp;latest=1">Latest Updates</a>
     |   <a href="[% cgipath %]/pages.cgi?act=hits-pages">Top Galleries</a>

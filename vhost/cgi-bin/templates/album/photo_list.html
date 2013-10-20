@@ -14,11 +14,11 @@
   <form method="post" action="[% cgipath %]/pages.cgi">
     <input type="hidden" name="act" value="album-main" />
     <input type="hidden" name="latest" value="0" />
-    <p>[% ddmonths %][% ddyears %] <input type="submit" value="GO" /></p>
+    <p>[% ddmonths %][% ddyears %] <input type="submit" class="gobutton" value="GO" /></p>
   </form>
   <form method="post" action="[% cgipath %]/pages.cgi">
     <input type="hidden" name="act" value="album-search" />
-    <p>Photo Meta Search: <input type="text" name="metadata" value="" /> <input type="submit" value="GO" /></p>
+    <p>Photo Meta Search: <input type="text" name="metadata" value="" /> <input type="submit" class="gobutton" value="GO" /></p>
   </form>
   <p>
     <a href="[% cgipath %]/pages.cgi?act=album-main&amp;latest=1">Latest Updates</a> |

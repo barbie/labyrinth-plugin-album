@@ -1,5 +1,9 @@
 Changes for the Labyrinth-Plugin-Album
 
+        - fixed XHTML tags.
+        - added button classes.
+        - updated titles and breadcrumbs.
+
 1.04	2013-02-10
         - added cover photo feature.
         - added config support for image and thmbnail sizes.
