@@ -1,4 +1,5 @@
 Installation Instructions
+=========================
 
 The instructions are basically as per any Perl module.
 
@@ -6,22 +7,27 @@ The instructions are basically as per any Perl module.
 INSTALLING AUTOMATICALLY
 ------------------------
 
-The easiest way to install is via CPAN or CPANPLUS:
+The easiest way to install is via CPAN, CPANPLUS or cpanminus:
 
 CPAN:
 
     % perl -MCPAN -e shell                    [as root]
-    > install Labyrinth-Plugin-Album
+    > install Labyrinth::Plugin::Album
     > quit
 
 CPANPLUS:
 
     % cpanp
-    > i Labyrinth-Plugin-Album
+    > i Labyrinth::Plugin::Album
     > q
 
-See your local 'perldoc CPAN' or 'perldoc CPANPLUS' for
-instructions on setting up and configuring CPAN or CPANPLUS.
+cpanminus:
+
+    % cpanm Labyrinth::Plugin::Album
+
+See your local documentation ('perldoc CPAN', 'perldoc CPANPLUS' or 
+'perldoc cpanm') for further instructions on setting up and configuring your
+chosen installer.
 
 
 OBTAINING THE MODULE
@@ -33,7 +39,7 @@ downloaded from any CPAN site:
     http://www.cpan.org/modules/by-authors/id/B/BA/BARBIE/
     http://search.cpan.org/dist/Labyrinth-Plugin-Album/
 
-Phrasebook is distributed as a gzipped tar archive file:
+The release is distributed as a gzipped tar archive file:
 
     Labyrinth-Plugin-Album-<version>.tar.gz
 
@@ -97,17 +103,7 @@ If it worked, then become root and type:
 
     # make install
 
-Congratulations. You've just installed Data::Phrasebook.
-
-If you have a copy of cpantest installed, type:
-
-    % cpantest -g pass -nc -p `basename \`pwd\`` -auto
-
-Or:
-    % cpantest -g pass -nc -p Labyrinth-Plugin-Album-0.01 -auto
-
-That will tell both me and other potential users that the module
-built correctly on your machine.
+Congratulations. You've just installed Labyrinth::Plugin::Album.
 
 
 INSTALLING ADDITIONAL FILES

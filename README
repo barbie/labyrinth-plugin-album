@@ -4,8 +4,8 @@ Labyrinth-Plugin-Album
 Labyrinth is a Website Management Framework. This distribution enables Labyrinth
 to provide the features of a photo gallery.
 
-This distributions contains all the photo album handling functionality used
-to incorporate galleries into Labyrinth. This includes the templates, SQL,
+This distributions contains all the photo album handling functionality used to
+incorporate galleries into Labyrinth. This includes the templates, SQL,
 parameter validation and dispatch tables.
 
 INSTALLATION
@@ -29,5 +29,5 @@ COPYRIGHT & LICENSE
   Copyright (C) 2002-2014 Barbie for Miss Barbell Productions
   All Rights Reserved.
 
-  This module is free software; you can redistribute it and/or
-  modify it under the Artistic License 2.0.
+  This distribution is free software; you can redistribute it and/or
+  modify it under the Artistic Licence v2.
