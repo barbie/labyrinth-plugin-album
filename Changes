@@ -1,6 +1,8 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
+        - fixed license fields in META.json to be lists.
+
 1.06	2014-04-16
         - fixed distribution name in META.
 
