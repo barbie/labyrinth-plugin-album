@@ -7,7 +7,7 @@ CREATE TABLE `imetadata` (
   `imageid` int(10) unsigned NOT NULL DEFAULT '0',
   `tag` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`imageid`,`tag`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Table structure for table `ixpages`
@@ -18,7 +18,7 @@ CREATE TABLE `ixpages` (
   `eventid` int(10) unsigned NOT NULL DEFAULT '0',
   `pageid` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY  (`eventid`,`pageid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Table structure for table `mxpages`
@@ -29,7 +29,7 @@ CREATE TABLE `mxpages` (
   `pageid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `metadata` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`pageid`,`metadata`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Table structure for table `mxphotos`
@@ -40,7 +40,7 @@ CREATE TABLE `mxphotos` (
   `photoid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `metadata` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (`photoid`,`metadata`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Table structure for table `pages`
@@ -58,12 +58,13 @@ CREATE TABLE `pages` (
   `hide` int(1) DEFAULT '0',
   `path` varchar(64) NOT NULL DEFAULT '',
   `summary` blob,
-  PRIMARY KEY  (`pageid`)
-  KEY `YRIX` (`year`)
+  PRIMARY KEY  (`pageid`),
+  KEY `YRIX` (`year`),
   KEY `MNIX` (`month`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO pages (pageid,title) VALUES (1,'Archive');
+
 
 --
 -- Table structure for table `photos`
@@ -80,10 +81,10 @@ CREATE TABLE `photos` (
   `hide` tinyint(4) NOT NULL DEFAULT '0',
   `cover` tinyint(4) NOT NULL DEFAULT '0',
   `dimensions` varchar(32) DEFAULT NULL,
-  PRIMARY KEY  (`photoid`)
-  KEY `PAGIX` (`pageid`)
+  PRIMARY KEY  (`photoid`),
+  KEY `PAGIX` (`pageid`),
   KEY `COVER` (`cover`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Table structure for table `updates`
@@ -99,4 +100,5 @@ CREATE TABLE `updates` (
   PRIMARY KEY (`upid`),
   KEY `AREIX` (`area`),
   KEY `PAGIX` (`pageid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
