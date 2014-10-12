@@ -22,6 +22,7 @@ WriteMakefile(
 
         # build/test prereqs
         'IO::File'                  => '0',
+        'Labyrinth::Test::Harness'  => '1.02',
         'Test::More'                => '0.70'
 
     }
