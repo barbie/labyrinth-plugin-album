@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Pages;
 use strict;
 use warnings;
 
-my $VERSION = '1.06';
+our $VERSION = '1.06';
 
 =head1 NAME
 
@@ -437,12 +437,17 @@ sub Edit {
     $tvars{data}->{ddpages}  = PageSelect(undef,1,'parent',$tvars{data}->{pageid});
 
     # check we have an accessible directory to store photos
-    my $dir = "$settings{webdir}/$tvars{data}->{path}";
-    $tvars{data}->{exists}     = -e "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
-    $tvars{data}->{directory}  = -d "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
-    $tvars{data}->{readable}   = -r "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
-    $tvars{data}->{writeable}  = -w "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
-    $tvars{data}->{executable} = -x "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+    if($tvars{data}->{path}) {
+        $settings{webdir} ||= '';
+        my $dir = "$settings{webdir}/$tvars{data}->{path}";
+        $tvars{data}->{exists}     = -e "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+        $tvars{data}->{directory}  = -d "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+        $tvars{data}->{readable}   = -r "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+        $tvars{data}->{writeable}  = -w "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+        $tvars{data}->{executable} = -x "$settings{webdir}/$tvars{data}->{path}" ? 1 : 0;
+    } else {
+        $tvars{data}->{$_} = 0  for(qw(exists directory readable writeable executable));    
+    }
 
     # default image sizes
     $tvars{dimensions}->{photowidth}  = $settings{maxphotowidth}  || MaxPhotoWidth;
@@ -568,10 +573,12 @@ sub Selection {
 
 sub PageSelect {
     my ($opt,$blank,$name,@ignore) = @_;
+    my (@list,%ignore);
+
     $name ||= 'pageid';
+    %ignore = map {$_=>1} grep {$_} @ignore;
+
     my @rs = $dbi->GetQuery('hash','AdminPages');
-    my %ignore = map {$_=>1} @ignore;
-    my @list;
     for my $rec (@rs) {
         next    if($ignore{$rec->{pageid}});
         push @list, {id=>$rec->{pageid},value=>"$rec->{title}"};
