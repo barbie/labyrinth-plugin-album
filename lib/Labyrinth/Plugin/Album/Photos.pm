@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Photos;
 use strict;
 use warnings;
 
-my $VERSION = '1.06';
+our $VERSION = '1.06';
 
 =head1 NAME
 
@@ -40,13 +40,12 @@ use Labyrinth::Plugin::Hits;
 # html: 0 = none, 1 = text, 2 = textarea
 
 my %fields = (
-    title       => { type => 1, html => 1 },
-    summary     => { type => 0, html => 2 },
-    photoid     => { type => 0, html => 0 },
+    photoid     => { type => 1, html => 0 },
     pageid      => { type => 0, html => 0 },
     thumb       => { type => 0, html => 0 },
     image       => { type => 0, html => 0 },
     tagline     => { type => 0, html => 1 },
+    summary     => { type => 0, html => 2 },
     hide        => { type => 0, html => 0 },
 );
 
@@ -376,6 +375,7 @@ sub Move {
 
 sub Save {
     return  unless AccessUser($LEVEL);
+    my @fields;
 
     for(keys %fields) {
            if($fields{$_}->{html} == 1) { $cgiparams{$_} = CleanHTML($cgiparams{$_}) }
@@ -386,7 +386,7 @@ sub Save {
     return  if FieldCheck(\@allfields,\@mandatory);
 
     $tvars{data}->{hide} = $tvars{data}->{hide} ? 1 : 0;
-    push my @fields, $tvars{data}->{$_} for(qw(pageid thumb image tagline hide photoid));
+    push @fields, $tvars{data}->{$_} for(qw(pageid thumb image tagline hide photoid));
     $dbi->DoQuery('UpdatePhoto2',@fields);
 
     $hits->SetUpdates('album',0,$tvars{data}->{pageid});
@@ -397,7 +397,7 @@ sub Archive {
     return  unless AccessUser($LEVEL);
     return  unless $cgiparams{$INDEXKEY};
 
-    my @rows = $dbi->GetQuery('hash','GetPhotoByID',$cgiparams{$INDEXKEY});
+    my @rows = $dbi->GetQuery('hash','GetPhotoDetail',$cgiparams{$INDEXKEY});
     if($rows[0]->{pageid} == 1) {
         return  unless AccessUser(ADMIN);
         my @photo = $dbi->GetQuery('hash','CheckPhoto',1,$cgiparams{$INDEXKEY});
