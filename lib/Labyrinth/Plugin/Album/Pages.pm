@@ -372,7 +372,7 @@ sub ArchiveEdit {
 
         } elsif($cgiparams{doaction} eq 'Move') {
             $cgiparams{'pageid'} ||= 1;
-            $dbi->DoQuery('MovePhotos',$cgiparams{'pageid'},{ids=>join(',',@ids)});
+            $dbi->DoQuery('MovePhotos',{ids=>join(',',@ids)},$cgiparams{'pageid'})  if(@ids);
         }
     }
 
@@ -509,7 +509,7 @@ sub Save {
             $dbi->DoQuery('DeletePhoto',$_->{photoid});
         }
     } else {
-        $dbi->DoQuery('MovePhotos',{ids => join(',',@ids)},1);
+        $dbi->DoQuery('MovePhotos',{ids => join(',',@ids)},1)   if(@ids);
     }
 
     # get fresh list
