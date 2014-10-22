@@ -1,6 +1,7 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
+1.07	2014-10-21
         - fixed license fields in META.json to be lists.
         - extended META and functional test suite.
         - added Labyrinth::Test::Harness to pre-requisites.
