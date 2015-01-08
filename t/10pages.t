@@ -5,15 +5,18 @@ use Data::Dumper;
 use Labyrinth::Test::Harness;
 use Test::More tests => 44;
 
+my (undef,undef,undef,undef,undef,$year) = localtime(time);
+$year += 1900;
+
 my $test_vars = {
    'testing' => '0',
    'copyright' => '2013-2014 Me',
-   'cgiroot' => 'http:/',
+   'cgiroot' => 'http://example.com',
    'ddmonths' => '<select id="month" name="month"><option value="0">Select Month</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
    'administrator' => 'admin@example.com',
    'pid' => 4,
    'timeout' => '3600',
-   'docroot' => 'http:/',
+   'docroot' => 'http://example.com',
    'iname' => 'Test Site',
    'blank' => 'images/blank.png',
    'cookiename' => 'session',
@@ -35,18 +38,18 @@ my $test_vars = {
    'requests' => 't/_DBDIR/cgi-bin/config/requests',
    'cgipath' => '/cgi-bin',
    'basedir' => 't/_DBDIR',
-   'host' => '',
+   'host' => 'example.com',
    'icode' => 'testsite',
-   'ddyears' => '<select id="year" name="year"><option value="0">Select Year</option><option value="2014" selected="selected">2014</option></select>',
+   'ddyears' => qq'<select id="year" name="year"><option value="0">Select Year</option><option value="$year" selected="selected">$year</option></select>',
    'evalperl' => '1',
    'randpicwidth' => '400',
-   'year' => '2014'
+   'year' => $year
 };
 
 my $test_data = { 
     add => {
        'ddmonths' => '<select id="month" name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
-       'ddyears' => '<select id="year" name="year"><option value="2014">2014</option></select>',
+       'ddyears' => qq'<select id="year" name="year"><option value="$year">$year</option></select>',
        'senarios' => [
                        {
                          'title' => 'Photos Section',
@@ -67,7 +70,7 @@ my $test_data = {
        'ddmonths' => '<select id="month" name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="3">Test Page</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
        'executable' => 0,
-       'ddyears' => '<select id="year" name="year"><option value="2014">2014</option></select>',
+       'ddyears' => qq'<select id="year" name="year"><option value="$year">$year</option></select>',
        'exists' => 0,
        'readable' => 0
     },
@@ -85,7 +88,7 @@ my $test_data = {
         'writeable' => 0,
         'path' => 'photos/20050830',
         'hide' => '',
-        'ddyears' => '<select id="year" name="year"><option value="2014">2014</option></select>',
+        'ddyears' => qq'<select id="year" name="year"><option value="$year">$year</option></select>',
         'title' => 'Test Page',
         'orderno' => '0',
         'exists' => 0,
@@ -105,7 +108,7 @@ my $test_data = {
         'writeable' => 0,
         'path' => 'photos/20050830',
         'hide' => '',
-        'ddyears' => '<select id="year" name="year"><option value="2014">2014</option></select>',
+        'ddyears' => qq'<select id="year" name="year"><option value="$year">$year</option></select>',
         'title' => 'Test Page',
         'orderno' => '0',
         'exists' => 0,
@@ -181,7 +184,7 @@ my $test_data = {
         'writeable' => 0,
         'path' => 'photos/20050830',
         'hide' => '',
-        'ddyears' => '<select id="year" name="year"><option value="2014">2014</option></select>',
+        'ddyears' => qq'<select id="year" name="year"><option value="$year">$year</option></select>',
         'title' => 'Test Page',
         'orderno' => '0',
         'exists' => 0,
