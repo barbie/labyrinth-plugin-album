@@ -2,6 +2,7 @@
     IF data.pageid ; THEN ; status = 'Edit' ; ELSE ; status = 'Add' ; END ;
 
     title = status _ ' Gallery Page' ;
+    lightbox = 1 ;
 
     crumb2_name = 'Gallery' ;
     crumb2_href = '/album-admin' ;
@@ -81,7 +82,7 @@ the page.</p>
 [% FOREACH photo = photos %]
 <tr>
     <td>[% photo.orderno %]</td>
-    <td><a href='[% picpath %]/photos/[% photo.image %]'><img src="[% webpath %]/photos/[% photo.thumb %]" height="50" border="0" alt="[% photo.tag %]" /></a></td>
+    <td><a href='[% picpath %]/photos/[% photo.image %]?v=[% timestamp %]' rel="lightbox[[% photo.pageid %]]" ><img src="[% webpath %]/photos/[% photo.thumb %]?v=[% timestamp %]" height="50" border="0" alt="[% photo.tag %]" /></a></td>
     <td>[% photo.image %]<br /><input type="text" name="TAG[% photo.photoid %]" value="[% photo.tagline %]" /> - Tagline<br /><input type="text" name="META[% photo.photoid %]" value="[% photo.metadata %]" /> - Metadata</td>
     <td><input type="radio"    name="COVER"  value="[% photo.photoid %]" [% IF photo.cover %]checked="checked"[% END %] /></td>
     <td><input type="checkbox" name="HIDE" value="[% photo.photoid %]" [% IF photo.hide %]checked="checked"[% END %] /></td>

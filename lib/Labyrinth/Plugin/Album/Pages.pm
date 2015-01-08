@@ -454,6 +454,8 @@ sub Edit {
     $tvars{dimensions}->{photoheight} = $settings{maxphotoheight} || MaxPhotoHeight;
     $tvars{dimensions}->{thumbwidth}  = $settings{maxthumbwidth}  || MaxThumbWidth;
     $tvars{dimensions}->{thumbheight} = $settings{maxthumbheight} || MaxThumbHeight;
+
+    $tvars{timestamp} = formatDate(0);
 }
 
 sub Save {
