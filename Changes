@@ -1,6 +1,7 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
+1.08	2015-01-09
         - add lightbox links to the edit page template.
         - avoid browser caching of images on edit page by using a timesamp.
         - added thumbnails fix script, where uploaded images need thumbnails
