@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Pages;
 use strict;
 use warnings;
 
-our $VERSION = '1.08';
+our $VERSION = '1.09';
 
 =head1 NAME
 

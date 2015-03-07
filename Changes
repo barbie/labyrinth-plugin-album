@@ -1,6 +1,7 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
+1.09	2015-03-07
         - When uploading an image for an album, there will be no delete
           requests. As such, don't perform them and get SQL erros!
 
