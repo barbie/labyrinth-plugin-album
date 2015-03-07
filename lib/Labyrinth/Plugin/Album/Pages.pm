@@ -499,19 +499,21 @@ sub Save {
     # archive unwanted photos
     my @ids = grep { /^\d+$/ } CGIArray('DELETE');
 #   LogDebug("Delete IDs: @ids");
-    if($cgiparams{pageid} == 1) {
-        # only delete photos in the archive
-        my @rows = $dbi->GetQuery('hash','CheckPhotos',{ids => join(',',@ids)},1);
-        for(@rows) {
-            my @photo = $dbi->GetQuery('hash','CheckPhoto',1,$_->{photoid});
-            if(@photo && $photo[0]->{count} == 1) {   # only delete if no others match
-                DeleteFile( file => "$settings{webdir}/photos/$_->{image}" );
-                DeleteFile( file => "$settings{webdir}/photos/$_->{thumb}" );
+    if(@ids) {
+        if($cgiparams{pageid} == 1) {
+            # only delete photos in the archive
+            my @rows = $dbi->GetQuery('hash','CheckPhotos',{ids => join(',',@ids)},1);
+            for(@rows) {
+                my @photo = $dbi->GetQuery('hash','CheckPhoto',1,$_->{photoid});
+                if(@photo && $photo[0]->{count} == 1) {   # only delete if no others match
+                    DeleteFile( file => "$settings{webdir}/photos/$_->{image}" );
+                    DeleteFile( file => "$settings{webdir}/photos/$_->{thumb}" );
+                }
+                $dbi->DoQuery('DeletePhoto',$_->{photoid});
             }
-            $dbi->DoQuery('DeletePhoto',$_->{photoid});
+        } else {
+            $dbi->DoQuery('MovePhotos',{ids => join(',',@ids)},1)   if(@ids);
         }
-    } else {
-        $dbi->DoQuery('MovePhotos',{ids => join(',',@ids)},1)   if(@ids);
     }
 
     # get fresh list
