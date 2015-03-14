@@ -535,7 +535,7 @@ sub Save {
         $order++;
 
         my $data = defined $cgiparams{"META$id"} ? $cgiparams{"META$id"} : '';
-        MetaSave($id,['Photo'],split(/[ ,]+/,$data))
+        MetaSave($id,['Photo'],split(/[ ,]+/,$data))    if($data);
     }
 
     # upload new photos
