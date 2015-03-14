@@ -1,6 +1,7 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
+1.10	2015-03-14
         - bugfix, don't save non-existent metadata!
 
 1.09	2015-03-07
