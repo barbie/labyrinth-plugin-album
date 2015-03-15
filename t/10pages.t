@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 48;
+use Test::More tests => 56;
 
 my (undef,undef,undef,undef,undef,$year) = localtime(time);
 $year += 1900;
@@ -249,7 +249,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 48  unless($res);
+    skip "Unable to prep the test environment", 56  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -430,7 +430,20 @@ SKIP: {
     diag("selection2 vars=".Dumper($vars->{ddpages}));
     is($vars->{ddpages},'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3" selected="selected">Test Page</option><option value="1">Archive</option></select>','selection retrieved successfully');
 
-    
+
+    my ($opt,$blank,$name,@ignore) = @_;
+
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(),       '<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(1),      '<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(1,1),    '<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(1,0),    '<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,1),'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0),'<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid'),      '<select id="albumid" name="albumid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid',2,4,5),'<select id="albumid" name="albumid"><option value="3">Test Page</option><option value="1">Archive</option></select>');
+ 
+
     # -------------------------------------------------------------------------
     # Admin Link Delete/Save methods - as we change the db
 
