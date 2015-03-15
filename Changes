@@ -1,7 +1,7 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
-        - added functional tests for View & Random methods. (Photos)
+        - added functional tests for View, Random & Gallery methods. (Photos)
 
 1.10	2015-03-14
         - bugfix, don't save non-existent metadata!

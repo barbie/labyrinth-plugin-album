@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 50;
+use Test::More tests => 54;
 
 my $test_vars = {
         'testing' => '0',
@@ -153,7 +153,116 @@ my $test_data = {
                 'parent' => '0',
                 'pageid' => '3'
         }
-    }      
+    },
+    gallery1 => [
+                {
+                  'pageid' => '3',
+                  'dimensions' => '800x600',
+                  'tagline' => undef,
+                  'hide' => '0',
+                  'cover' => '1',
+                  'photoid' => '1',
+                  'image' => '20050830/dscf5903.jpg',
+                  'orderno' => '1',
+                  'thumb' => 'photos/20050830/dscf5903-thumb.jpg'
+                },
+                {
+                  'photoid' => '2',
+                  'image' => 'image.jpg',
+                  'cover' => '0',
+                  'hide' => '0',
+                  'orderno' => '2',
+                  'thumb' => 'photos/thumb.png',
+                  'pageid' => '3',
+                  'tagline' => 'Labyrinth',
+                  'dimensions' => '800x600'
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                }
+    ],
+    gallery2 => [
+                {
+                  'photoid' => '2',
+                  'image' => 'image.jpg',
+                  'cover' => '0',
+                  'hide' => '0',
+                  'orderno' => '2',
+                  'thumb' => 'photos/thumb.png',
+                  'pageid' => '3',
+                  'tagline' => 'Labyrinth',
+                  'dimensions' => '800x600'
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'tagline' => '',
+                  'thumb' => 'images/blank.png'
+                },
+                {
+                  'thumb' => 'images/blank.png',
+                  'tagline' => ''
+                }
+    ]
 };
 
 my @plugins = qw(
@@ -178,7 +287,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 50  unless($res);
+    skip "Unable to prep the test environment", 54  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -334,6 +443,7 @@ SKIP: {
 
 
     # view random photo
+    $loader->clear;
     $loader->refresh(
         \@plugins,
         { irand1 => undef, irand2 => undef } );
@@ -345,13 +455,13 @@ SKIP: {
     ok( defined $vars->{irand1},'random photo irand1 variables are as expected');
     ok(!defined $vars->{irand2},'random photo irand1 variables not defined are as expected');
 
-    # view random photo
+    # view random photos
+    $loader->clear;
     $loader->refresh(
         \@plugins,
         { irand1 => undef, irand2 => undef },
         {},
-        { random => 2 }
-        );
+        { random => 2 } );
 
     $res = is($loader->action('Album::Photos::Random'),1);
     diag($loader->error)    unless($res);
@@ -359,6 +469,31 @@ SKIP: {
     #diag("random2 vars=".Dumper($vars));
     ok(defined $vars->{irand1},'random photo irand1 variables are as expected');
     ok(defined $vars->{irand2},'random photo irand1 variables are as expected');
+
+
+    # view gallery
+    $loader->clear;
+    $loader->refresh(
+        \@plugins,
+        { loggedin => 1, loginid => 1 } );
+
+    $res = is($loader->action('Album::Photos::Gallery'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("gallery1 vars=".Dumper($vars));
+    is_deeply($vars->{data},$test_data->{gallery1},'gallery1 variables are as expected');
+
+    # view gallery for a start point
+    $loader->clear;
+    $loader->refresh(
+        \@plugins,
+        { loggedin => 1, loginid => 1 }, { start => 2 } );
+
+    $res = is($loader->action('Album::Photos::Gallery'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("gallery2 vars=".Dumper($vars));
+    is_deeply($vars->{data},$test_data->{gallery2},'gallery2 variables are as expected');
 
 
     # -------------------------------------------------------------------------
