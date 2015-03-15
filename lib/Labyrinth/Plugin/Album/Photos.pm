@@ -281,7 +281,7 @@ sub Gallery {
 }
 
 sub Albums {
-    next unless($cgiparams{'pages'});
+    return  unless($cgiparams{'pages'});
     my @pages = split(',',$cgiparams{'pages'});
     for my $page (@pages) {
         $cgiparams{pageid} = $page;

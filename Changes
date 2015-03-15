@@ -3,6 +3,7 @@ Changes for Labyrinth-Plugin-Album
 
         - added functional tests for View, Random, Gallery & Albums methods.
           (Photos)
+        - fixed logic bug in Albums method.
 
 1.10	2015-03-14
         - bugfix, don't save non-existent metadata!
