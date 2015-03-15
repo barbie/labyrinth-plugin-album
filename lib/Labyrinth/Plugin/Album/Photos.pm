@@ -265,9 +265,9 @@ sub Gallery {
     my $where;
 
     if($cgiparams{'searchmeta'}) {
-    $cgiparams{'searchmeta'} =~ s/[,\s]+/,/g;
-    $cgiparams{'searchmeta'} = join(",", map {"'$_'"} split(",",$cgiparams{'searchmeta'}));
-    $where .= " AND m.tag IN ($cgiparams{'searchmeta'})"        if($cgiparams{'searchmeta'});
+        $cgiparams{'searchmeta'} =~ s/[,\s]+/,/g;
+        $cgiparams{'searchmeta'} = join(",", map {"'$_'"} split(",",$cgiparams{'searchmeta'}));
+        $where .= " AND m.tag IN ($cgiparams{'searchmeta'})"        if($cgiparams{'searchmeta'});
     }
 
     my @rows = $dbi->GetQuery('hash',$key.'Gallery',{where=>$where},$start);
