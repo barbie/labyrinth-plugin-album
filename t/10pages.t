@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 56;
+use Test::More tests => 60;
 
 my (undef,undef,undef,undef,undef,$year) = localtime(time);
 $year += 1900;
@@ -225,6 +225,34 @@ my $test_data = {
        'orderno' => '0',
        'year' => '2014'
     },
+    'children2' => {
+        'children' => [
+            {
+                'orderno' => '3',
+                'summary' => '',
+                'title' => 'Test Sub Page 1',
+                'month' => '8',
+                'area' => '1',
+                'hide' => '0',
+                'parent' => '3',
+                'path' => 'photos/20050830',
+                'pageid' => '4',
+                'year' => '2005'
+            },
+            {
+                'year' => '2005',
+                'path' => 'photos/20050830',
+                'pageid' => '5',
+                'parent' => '3',
+                'hide' => '0',
+                'month' => '8',
+                'area' => '1',
+                'title' => 'Test Sub Page 2',
+                'orderno' => '4',
+                'summary' => ''
+            }
+        ]
+    },
 };
 
 my @plugins = qw(
@@ -249,7 +277,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 56  unless($res);
+    skip "Unable to prep the test environment", 60  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -431,8 +459,7 @@ SKIP: {
     is($vars->{ddpages},'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3" selected="selected">Test Page</option><option value="1">Archive</option></select>');
 
 
-    my ($opt,$blank,$name,@ignore) = @_;
-
+    # drop downs
     is(Labyrinth::Plugin::Album::Pages::PageSelect(),       '<select id="pageid" name="pageid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
     is(Labyrinth::Plugin::Album::Pages::PageSelect(1),      '<select id="pageid" name="pageid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
     is(Labyrinth::Plugin::Album::Pages::PageSelect(1,1),    '<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
@@ -443,6 +470,24 @@ SKIP: {
     is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid'),      '<select id="albumid" name="albumid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
     is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid',2,4,5),'<select id="albumid" name="albumid"><option value="6">A New Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
  
+
+    # Children - no children
+    $loader->clear;
+    $loader->refresh( \@plugins, {}, { pageid => 2 } );
+    $res = is($loader->action('Album::Pages::Children'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("children1 vars=".Dumper($vars));
+    is_deeply($vars->{album},undef,'children1 variables are as expected');
+
+    # Children - with children
+    $loader->clear;
+    $loader->refresh( \@plugins, {}, { pid => 3 } );
+    $res = is($loader->action('Album::Pages::Children'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("children2 vars=".Dumper($vars));
+    is_deeply($vars->{album},$test_data->{children2},'children2 variables are as expected');
 
     # -------------------------------------------------------------------------
     # Admin Link Delete/Save methods - as we change the db
