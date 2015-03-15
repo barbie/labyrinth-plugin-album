@@ -1,6 +1,6 @@
 {
     "name": "Labyrinth-Plugin-Album",
-    "version": "1.10",
+    "version": "1.11",
     "abstract": "Album plugin for the Labyrinth framework",
     "author": [
         "Barbie (BARBIE) <barbie@cpan.org>"
@@ -48,15 +48,15 @@
     "provides": {
         "Labyrinth::Plugin::Album": {
             "file": "lib/Labyrinth/Plugin/Album.pm",
-            "version": "1.10"
+            "version": "1.11"
         },
         "Labyrinth::Plugin::Album::Pages": {
             "file": "lib/Labyrinth/Plugin/Album/Pages.pm",
-            "version": "1.10"
+            "version": "1.11"
         },
         "Labyrinth::Plugin::Album::Photos": {
             "file": "lib/Labyrinth/Plugin/Album/Photos.pm",
-            "version": "1.10"
+            "version": "1.11"
         }
     },
     "no_index": {

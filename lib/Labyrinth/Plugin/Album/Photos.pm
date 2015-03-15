@@ -3,7 +3,7 @@ package Labyrinth::Plugin::Album::Photos;
 use strict;
 use warnings;
 
-our $VERSION = '1.10';
+our $VERSION = '1.11';
 
 =head1 NAME
 
