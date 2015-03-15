@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 44;
+use Test::More tests => 50;
 
 my $test_vars = {
         'testing' => '0',
@@ -178,7 +178,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 44  unless($res);
+    skip "Unable to prep the test environment", 50  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -331,6 +331,35 @@ SKIP: {
     $vars = $loader->vars;
     #diag("view2 vars=".Dumper($vars));
     is($vars->{errcode},'ERROR','admin list variables are as expected');
+
+
+    # view random photo
+    $loader->refresh(
+        \@plugins,
+        { irand1 => undef, irand2 => undef } );
+
+    $res = is($loader->action('Album::Photos::Random'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("random1 vars=".Dumper($vars));
+    ok( defined $vars->{irand1},'random photo irand1 variables are as expected');
+    ok(!defined $vars->{irand2},'random photo irand1 variables not defined are as expected');
+
+    # view random photo
+    $loader->refresh(
+        \@plugins,
+        { irand1 => undef, irand2 => undef },
+        {},
+        { random => 2 }
+        );
+
+    $res = is($loader->action('Album::Photos::Random'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("random2 vars=".Dumper($vars));
+    ok(defined $vars->{irand1},'random photo irand1 variables are as expected');
+    ok(defined $vars->{irand2},'random photo irand1 variables are as expected');
+
 
     # -------------------------------------------------------------------------
     # Admin Link Delete/Save methods - as we change the db
