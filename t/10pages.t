@@ -68,7 +68,7 @@ my $test_data = {
                      ],
        'directory' => 0,
        'ddmonths' => '<select id="month" name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
-       'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="3">Test Page</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
+       'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
        'executable' => 0,
        'ddyears' => qq'<select id="year" name="year"><option value="$year">$year</option></select>',
        'exists' => 0,
@@ -79,7 +79,7 @@ my $test_data = {
         'area' => '1',
         'directory' => 0,
         'ddmonths' => '<select id="month" name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8" selected="selected">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
-        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
+        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
         'summary' => '',
         'executable' => 0,
         'pageid' => '3',
@@ -99,7 +99,7 @@ my $test_data = {
         'area' => '1',
         'directory' => 0,
         'ddmonths' => '<select id="month" name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8" selected="selected">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
-        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
+        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
         'summary' => '',
         'executable' => 0,
         'pageid' => '3',
@@ -127,7 +127,7 @@ my $test_data = {
           'cover' => '1',
           'hide' => '0',
           'pageid' => '3',
-          'metadata' => undef,
+          'metadata' => 'Labyrinth Test',
           'orderno' => '1'
         },
         {
@@ -139,7 +139,7 @@ my $test_data = {
           'cover' => '0',
           'hide' => '0',
           'pageid' => '3',
-          'metadata' => undef,
+          'metadata' => 'Labyrinth',
           'orderno' => '2'
         }
     ],
@@ -153,7 +153,7 @@ my $test_data = {
           'cover' => '0',
           'hide' => '0',
           'pageid' => '3',
-          'metadata' => undef,
+          'metadata' => 'Labyrinth',
           'orderno' => '1'
         },
         {
@@ -165,7 +165,7 @@ my $test_data = {
           'cover' => '1',
           'hide' => '0',
           'pageid' => '3',
-          'metadata' => undef,
+          'metadata' => 'Labyrinth Test',
           'orderno' => '2'
         }
     ],
@@ -175,7 +175,7 @@ my $test_data = {
         'area' => '1',
         'directory' => 0,
         'ddmonths' => '<select id="month" name="month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8" selected="selected">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select>',
-        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
+        'ddpages' => '<select id="parent" name="parent"><option value="0">Select Gallery Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="2">Home Page</option><option value="1">Archive</option></select>',
         'summary' => '',
         'executable' => 0,
         'pageid' => '3',
@@ -197,7 +197,7 @@ my $test_data = {
         'path' => 'photos/20141112T215303',
         'summary' => 'blah',
         'hide' => 0,
-        'pageid' => '4',
+        'pageid' => '6',
         'title' => 'A New Page',
         'year' => '2014'
     },
@@ -418,8 +418,8 @@ SKIP: {
     $res = is($loader->action('Album::Pages::Selection'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
-    diag("selection1 vars=".Dumper($vars->{ddpages}));
-    is($vars->{ddpages},'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>','selection retrieved successfully');
+    #diag("selection1 vars=".Dumper($vars->{ddpages}));
+    is($vars->{ddpages},'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
 
     # Named Page Selection
     $loader->clear;
@@ -427,21 +427,21 @@ SKIP: {
     $res = is($loader->action('Album::Pages::Selection'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
-    diag("selection2 vars=".Dumper($vars->{ddpages}));
-    is($vars->{ddpages},'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3" selected="selected">Test Page</option><option value="1">Archive</option></select>','selection retrieved successfully');
+    #diag("selection2 vars=".Dumper($vars->{ddpages}));
+    is($vars->{ddpages},'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3" selected="selected">Test Page</option><option value="1">Archive</option></select>');
 
 
     my ($opt,$blank,$name,@ignore) = @_;
 
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(),       '<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(1),      '<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(1,1),    '<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(1,0),    '<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,1),'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0),'<select id="pageid" name="pageid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(),       '<select id="pageid" name="pageid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(1),      '<select id="pageid" name="pageid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(1,1),    '<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(1,0),    '<select id="pageid" name="pageid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1" selected="selected">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,1),'<select id="pageid" name="pageid"><option value="0">Select Gallery Page</option><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0),'<select id="pageid" name="pageid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
 
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid'),      '<select id="albumid" name="albumid"><option value="4">A New Page</option><option value="2">An Updated Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
-    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid',2,4,5),'<select id="albumid" name="albumid"><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid'),      '<select id="albumid" name="albumid"><option value="6">A New Page</option><option value="2">An Updated Page</option><option value="5">Test Sub Page 2</option><option value="4">Test Sub Page 1</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
+    is(Labyrinth::Plugin::Album::Pages::PageSelect(undef,0,'albumid',2,4,5),'<select id="albumid" name="albumid"><option value="6">A New Page</option><option value="3">Test Page</option><option value="1">Archive</option></select>');
  
 
     # -------------------------------------------------------------------------

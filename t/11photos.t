@@ -47,22 +47,30 @@ my $test_data = {
     },
     edit1a => [
         {
-          'pageid' => '1',
-          'title' => 'Archive'
+          'title' => 'Archive',
+          'pageid' => '1'
         },
         {
-          'pageid' => '2',
-          'title' => 'Home Page'
+          'title' => 'Home Page',
+          'pageid' => '2'
         },
         {
-          'pageid' => '3',
-          'title' => 'Test Page'
+          'title' => 'Test Page',
+          'pageid' => '3'
+        },
+        {
+          'pageid' => '4',
+          'title' => 'Test Sub Page 1'
+        },
+        {
+          'title' => 'Test Sub Page 2',
+          'pageid' => '5'
         }
     ],
     edit2a => [
         {
-          'pageid' => '1',
-          'title' => 'Archive'
+          'title' => 'Archive',
+          'pageid' => '1'
         },
         {
           'pageid' => '2',
@@ -71,6 +79,14 @@ my $test_data = {
         {
           'pageid' => '3',
           'title' => 'Test Page'
+        },
+        {
+          'pageid' => '4',
+          'title' => 'Test Sub Page 1'
+        },
+        {
+          'title' => 'Test Sub Page 2',
+          'pageid' => '5'
         }
     ],
     edit2b => {
@@ -86,34 +102,62 @@ my $test_data = {
     },
     admin1 => [
         {
-          'tagline' => undef,
-          'pageid' => '3',
-          'title' => 'Test Page',
           'photoid' => '1',
-          'thumb' => '20050830/dscf5903-thumb.jpg'
+          'thumb' => '20050830/dscf5903-thumb.jpg',
+          'pageid' => '3',
+          'tagline' => undef,
+          'title' => 'Test Page'
         },
         {
-          'tagline' => undef,
-          'pageid' => '3',
-          'title' => 'Test Page',
+          'thumb' => '20050830/dscf5904-thumb.jpg',
           'photoid' => '2',
-          'thumb' => '20050830/dscf5904-thumb.jpg'
+          'tagline' => undef,
+          'title' => 'Test Page',
+          'pageid' => '3'
+        },
+        {
+          'thumb' => '20050830/dscf5905-thumb.jpg',
+          'photoid' => '3',
+          'title' => 'Test Sub Page 1',
+          'tagline' => undef,
+          'pageid' => '4'
+        },
+        {
+          'thumb' => '20050830/dscf5906-thumb.jpg',
+          'photoid' => '4',
+          'title' => 'Test Sub Page 2',
+          'tagline' => undef,
+          'pageid' => '5'
         }
     ],
     admin3 => [
         {
-          'tagline' => undef,
-          'pageid' => '3',
           'title' => 'Test Page',
+          'tagline' => undef,
+          'thumb' => '20050830/dscf5903-thumb.jpg',
           'photoid' => '1',
-          'thumb' => '20050830/dscf5903-thumb.jpg'
+          'pageid' => '3'
         },
         {
-          'tagline' => 'Labyrinth',
+          'photoid' => '2',
           'pageid' => '3',
           'title' => 'Test Page',
-          'photoid' => '2',
+          'tagline' => 'Labyrinth',
           'thumb' => 'thumb.png'
+        },
+        {
+          'title' => 'Test Sub Page 1',
+          'tagline' => undef,
+          'thumb' => '20050830/dscf5905-thumb.jpg',
+          'photoid' => '3',
+          'pageid' => '4'
+        },
+        {
+          'pageid' => '5',
+          'photoid' => '4',
+          'tagline' => undef,
+          'thumb' => '20050830/dscf5906-thumb.jpg',
+          'title' => 'Test Sub Page 2'
         }
     ],
     admin4 => {
@@ -155,113 +199,157 @@ my $test_data = {
         }
     },
     gallery1 => [
-                {
-                  'pageid' => '3',
-                  'dimensions' => '800x600',
-                  'tagline' => undef,
-                  'hide' => '0',
-                  'cover' => '1',
-                  'photoid' => '1',
-                  'image' => '20050830/dscf5903.jpg',
-                  'orderno' => '1',
-                  'thumb' => 'photos/20050830/dscf5903-thumb.jpg'
-                },
-                {
-                  'photoid' => '2',
-                  'image' => 'image.jpg',
-                  'cover' => '0',
-                  'hide' => '0',
-                  'orderno' => '2',
-                  'thumb' => 'photos/thumb.png',
-                  'pageid' => '3',
-                  'tagline' => 'Labyrinth',
-                  'dimensions' => '800x600'
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                }
+        {
+          'photoid' => '1',
+          'image' => '20050830/dscf5903.jpg',
+          'cover' => '1',
+          'pageid' => '3',
+          'tagline' => undef,
+          'thumb' => 'photos/20050830/dscf5903-thumb.jpg',
+          'dimensions' => '800x600',
+          'orderno' => '1',
+          'hide' => '0'
+        },
+        {
+          'tagline' => 'Labyrinth',
+          'image' => 'image.jpg',
+          'photoid' => '2',
+          'pageid' => '3',
+          'cover' => '0',
+          'hide' => '0',
+          'orderno' => '2',
+          'dimensions' => '800x600',
+          'thumb' => 'photos/thumb.png'
+        },
+        {
+          'hide' => '0',
+          'dimensions' => '800x600',
+          'thumb' => 'photos/20050830/dscf5905-thumb.jpg',
+          'orderno' => '1',
+          'image' => '20050830/dscf5905.jpg',
+          'photoid' => '3',
+          'pageid' => '4',
+          'cover' => '1',
+          'tagline' => undef
+        },
+        {
+          'pageid' => '5',
+          'cover' => '0',
+          'image' => '20050830/dscf5906.jpg',
+          'photoid' => '4',
+          'tagline' => undef,
+          'hide' => '0',
+          'thumb' => 'photos/20050830/dscf5906-thumb.jpg',
+          'dimensions' => '800x600',
+          'orderno' => '1'
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'tagline' => '',
+          'thumb' => 'images/blank.png'
+        },
+        {
+          'tagline' => '',
+          'thumb' => 'images/blank.png'
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        }
     ],
     gallery2 => [
-                {
-                  'photoid' => '2',
-                  'image' => 'image.jpg',
-                  'cover' => '0',
-                  'hide' => '0',
-                  'orderno' => '2',
-                  'thumb' => 'photos/thumb.png',
-                  'pageid' => '3',
-                  'tagline' => 'Labyrinth',
-                  'dimensions' => '800x600'
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'tagline' => '',
-                  'thumb' => 'images/blank.png'
-                },
-                {
-                  'thumb' => 'images/blank.png',
-                  'tagline' => ''
-                }
+        {
+          'thumb' => 'photos/thumb.png',
+          'dimensions' => '800x600',
+          'orderno' => '2',
+          'hide' => '0',
+          'photoid' => '2',
+          'image' => 'image.jpg',
+          'cover' => '0',
+          'pageid' => '3',
+          'tagline' => 'Labyrinth'
+        },
+        {
+          'tagline' => undef,
+          'pageid' => '4',
+          'cover' => '1',
+          'image' => '20050830/dscf5905.jpg',
+          'photoid' => '3',
+          'hide' => '0',
+          'thumb' => 'photos/20050830/dscf5905-thumb.jpg',
+          'dimensions' => '800x600',
+          'orderno' => '1'
+        },
+        {
+          'tagline' => undef,
+          'cover' => '0',
+          'pageid' => '5',
+          'photoid' => '4',
+          'image' => '20050830/dscf5906.jpg',
+          'thumb' => 'photos/20050830/dscf5906-thumb.jpg',
+          'dimensions' => '800x600',
+          'orderno' => '1',
+          'hide' => '0'
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'tagline' => '',
+          'thumb' => 'images/blank.png'
+        },
+        {
+          'tagline' => '',
+          'thumb' => 'images/blank.png'
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        },
+        {
+          'thumb' => 'images/blank.png',
+          'tagline' => ''
+        }
     ],
     'albums' => {
         '3' => {
@@ -361,7 +449,6 @@ SKIP: {
     # test adding a link
     $res = is($loader->action('Album::Photos::Add'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("add vars=".Dumper($vars->{pages}));
     is_deeply($vars->{pages},$test_data->{add},'add variables are as expected');
@@ -374,7 +461,6 @@ SKIP: {
 
     $res = is($loader->action('Album::Photos::Edit'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("edit1a vars=".Dumper($vars->{pages}));
     is_deeply($vars->{pages},$test_data->{edit1a},"base data provided, when no photo given");
@@ -389,7 +475,6 @@ SKIP: {
 
     $res = is($loader->action('Album::Photos::Edit'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("edit2a vars=".Dumper($vars->{pages}));
     is_deeply($vars->{pages},$test_data->{edit2a},"base data provided, with photo given");
@@ -405,7 +490,6 @@ SKIP: {
     # test basic admin
     $res = is($loader->action('Album::Photos::Admin'),1);
     diag($loader->error)    unless($res);
-
     $vars = $loader->vars;
     #diag("admin1 vars=".Dumper($vars->{records}));
     is_deeply($vars->{records},$test_data->{admin1},'admin list variables are as expected');
@@ -421,7 +505,6 @@ SKIP: {
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
     is($vars->{thanks},undef,'failed to saved');
-
     $res = is($loader->action('Album::Photos::Admin'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
@@ -439,7 +522,6 @@ SKIP: {
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
     is($vars->{thanks_message},'Photo saved successfully.','successful save');
-
     $res = is($loader->action('Album::Photos::Admin'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
@@ -511,7 +593,7 @@ SKIP: {
     $res = is($loader->action('Album::Photos::Gallery'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
-    #diag("gallery1 vars=".Dumper($vars));
+    #diag("gallery1 vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{gallery1},'gallery1 variables are as expected');
 
     # view gallery for a start point
@@ -523,7 +605,7 @@ SKIP: {
     $res = is($loader->action('Album::Photos::Gallery'),1);
     diag($loader->error)    unless($res);
     $vars = $loader->vars;
-    #diag("gallery2 vars=".Dumper($vars));
+    #diag("gallery2 vars=".Dumper($vars->{data}));
     is_deeply($vars->{data},$test_data->{gallery2},'gallery2 variables are as expected');
 
 
