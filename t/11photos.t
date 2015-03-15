@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 39;
+use Test::More tests => 44;
 
 my $test_vars = {
         'testing' => '0',
@@ -125,7 +125,35 @@ my $test_data = {
         'hide' => 0,
         'pageid' => '',
         'title' => 'Labyrinth2'
-    }
+    },
+    view1 => {
+        'photo' => {
+                 'orderno' => '2',
+                 'photoid' => '2',
+                 'tagline' => 'Labyrinth',
+                 'cover' => '0',
+                 'pageid' => '3',
+                 'thumb' => 'thumb.png',
+                 'hide' => '0',
+                 'image' => 'image.jpg',
+                 'prev' => '1',
+                 'toobig' => 1,
+                 'dimensions' => '800x600'
+        },
+        'page' => {
+                'hide' => '0',
+                'year' => '2005',
+                'summary' => '',
+                'title' => 'Test Page',
+                'orderno' => '0',
+                'path' => 'photos/20050830',
+                'month' => 'August',
+                'tagline' => '',
+                'area' => '1',
+                'parent' => '0',
+                'pageid' => '3'
+        }
+    }      
 };
 
 my @plugins = qw(
@@ -150,7 +178,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 39  unless($res);
+    skip "Unable to prep the test environment", 44  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -278,6 +306,31 @@ SKIP: {
     #diag("admin3 vars=".Dumper($vars->{records}));
     is_deeply($vars->{records},$test_data->{admin3},'admin list variables are as expected');
     
+
+    # view known photo
+    $loader->refresh(
+        \@plugins,
+        { loggedin => 1, loginid => 1, data => undef },
+        { 'photoid' => 2 } );
+
+    $res = is($loader->action('Album::Photos::View'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("view1 vars=".Dumper($vars));
+    is_deeply($vars->{photo},$test_data->{view1}{photo},'view1 photo variables are as expected');
+    is_deeply($vars->{page},$test_data->{view1}{page},'view1 page variables are as expected');
+
+    # view unknown photo
+    $loader->refresh(
+        \@plugins,
+        { loggedin => 1, loginid => 1, data => undef },
+        { 'photoid' => 2999 } );
+
+    $res = is($loader->action('Album::Photos::View'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("view2 vars=".Dumper($vars));
+    is($vars->{errcode},'ERROR','admin list variables are as expected');
 
     # -------------------------------------------------------------------------
     # Admin Link Delete/Save methods - as we change the db
