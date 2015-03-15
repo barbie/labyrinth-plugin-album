@@ -3,7 +3,7 @@ use strict;
 
 use Data::Dumper;
 use Labyrinth::Test::Harness;
-use Test::More tests => 54;
+use Test::More tests => 56;
 
 my $test_vars = {
         'testing' => '0',
@@ -262,7 +262,38 @@ my $test_data = {
                   'thumb' => 'images/blank.png',
                   'tagline' => ''
                 }
-    ]
+    ],
+    'albums' => {
+        '3' => {
+            'records' => [
+                {
+                    'thumb' => '20050830/dscf5903-thumb.jpg',
+                    'image' => '20050830/dscf5903.jpg',
+                    'hide' => '0',
+                    'photoid' => '1',
+                    'cover' => '1',
+                    'orderno' => 1,
+                    'pageid' => '3',
+                    'dimensions' => '800x600',
+                    'tagline' => undef
+                },
+                {
+                    'pageid' => '3',
+                    'orderno' => 2,
+                    'cover' => '0',
+                    'photoid' => '2',
+                    'hide' => '0',
+                    'image' => 'image.jpg',
+                    'thumb' => 'thumb.png',
+                    'tagline' => 'Labyrinth',
+                    'dimensions' => '800x600'
+                }
+            ],
+        },
+        '2' => {
+            'records' => undef
+        }
+    },
 };
 
 my @plugins = qw(
@@ -287,7 +318,7 @@ my $res = $loader->prep(
 diag($loader->error)    unless($res);
 
 SKIP: {
-    skip "Unable to prep the test environment", 54  unless($res);
+    skip "Unable to prep the test environment", 56  unless($res);
 
     $res = is($loader->labyrinth(@plugins),1);
     diag($loader->error)    unless($res);
@@ -494,6 +525,19 @@ SKIP: {
     $vars = $loader->vars;
     #diag("gallery2 vars=".Dumper($vars));
     is_deeply($vars->{data},$test_data->{gallery2},'gallery2 variables are as expected');
+
+
+    # list albums
+    $loader->clear;
+    $loader->refresh(
+        \@plugins,
+        { loggedin => 1, loginid => 1 }, { 'pages' => '2,3' } );
+
+    $res = is($loader->action('Album::Photos::Albums'),1);
+    diag($loader->error)    unless($res);
+    $vars = $loader->vars;
+    #diag("albums vars=".Dumper($vars));
+    is_deeply($vars->{albums},$test_data->{albums},'albums variables are as expected');
 
 
     # -------------------------------------------------------------------------
