@@ -1,6 +1,7 @@
 Changes for Labyrinth-Plugin-Album
 ==================================
 
+1.12    2015-03-16
         - added functional tests for Children, Selection & PageSelect methods.
           (Pages)
         - added missing test data files.
